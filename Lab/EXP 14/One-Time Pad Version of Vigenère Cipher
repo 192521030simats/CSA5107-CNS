@@ -1,0 +1,35 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char p[] = "send more money";
+    char q[] = "cash not needed";
+    int k[] = {9,0,1,7,23,15,21,14,11,11,2,8,9};
+    int c[13], i, x;
+
+    printf("Ciphertext: ");
+    for(i=0; i<13; i++) {
+        if(p[i]==' ') {
+            printf(" ");
+            continue;
+        }
+        x = toupper(p[i])-'A';
+        c[i] = (x+k[i])%26;
+        printf("%c", c[i]+'A');
+    }
+
+    printf("\nKey for CASH NOT NEEDED: ");
+    for(i=0; i<13; i++) {
+        if(p[i]==' ') {
+            printf(" ");
+            continue;
+        }
+        x = toupper(q[i])-'A';
+        printf("%d ", (c[i]-x+26)%26);
+    }
+
+    printf("\n");
+    return 0;
+}
