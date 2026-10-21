@@ -1,0 +1,31 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char text[200], c;
+    int i, p1, p2, x, y;
+    int a = 9, b = 4, c1 = 5, d = 7;
+
+    printf("Enter plaintext: ");
+    fgets(text, sizeof(text), stdin);
+
+    printf("Ciphertext: ");
+    for (i = 0; text[i] && text[i+1]; ) {
+        while (text[i] && !isalpha(text[i])) i++;
+        if (!text[i]) break;
+        p1 = tolower(text[i++]) - 'a';
+
+        while (text[i] && !isalpha(text[i])) i++;
+        if (!text[i]) break;
+        p2 = tolower(text[i++]) - 'a';
+
+        x = (a*p1 + b*p2) % 26;
+        y = (c1*p1 + d*p2) % 26;
+
+        printf("%c%c", x+'A', y+'A');
+    }
+    printf("\n");
+    return 0;
+}
