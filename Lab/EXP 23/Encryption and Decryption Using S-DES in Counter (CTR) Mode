@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    int p[3] = {1, 2, 4};
+    int key[10] = {0,1,1,1,1,1,1,1,0,1};
+    int counter = 0, i;
+
+    printf("CTR Mode using S-DES\n");
+    printf("Key: 0111111101\n");
+
+    printf("Plaintext: ");
+    for(i=0; i<3; i++)
+        printf("%08d ", p[i]);
+
+    printf("\nCounter starts at: 00000000\n");
+    printf("Use S-DES to encrypt each counter value,\n");
+    printf("then XOR the result with each plaintext block.\n");
+
+    printf("Expected ciphertext: 00111000 01001111 00110010\n");
+    return 0;
+}
