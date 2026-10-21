@@ -1,0 +1,51 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char m[5][5] = {
+        {'M','F','H','I','K'},
+        {'U','N','O','P','Q'},
+        {'Z','V','W','X','Y'},
+        {'E','L','A','R','G'},
+        {'D','S','T','B','C'}
+    };
+    char text[200], p[200];
+    int i, j, n = 0, r1, c1, r2, c2;
+
+    printf("Enter plaintext: ");
+    fgets(text, sizeof(text), stdin);
+
+    for (i = 0; text[i]; i++)
+        if (isalpha(text[i])) {
+            char ch = toupper(text[i]);
+            p[n++] = (ch == 'J') ? 'I' : ch;
+        }
+
+    if (n % 2) p[n++] = 'X';
+
+    printf("Ciphertext: ");
+    for (i = 0; i < n; i += 2) {
+        for (r1 = 0; r1 < 5; r1++)
+            for (c1 = 0; c1 < 5; c1++)
+                if (m[r1][c1] == p[i]) goto found1;
+        found1:
+        for (r2 = 0; r2 < 5; r2++)
+            for (c2 = 0; c2 < 5; c2++)
+                if (m[r2][c2] == p[i+1]) goto found2;
+        found2:
+
+        if (r1 == r2)
+            printf("%c%c", m[r1][(c1+1)%5],
+                            m[r2][(c2+1)%5]);
+        else if (c1 == c2)
+            printf("%c%c", m[(r1+1)%5][c1],
+                            m[(r2+1)%5][c2]);
+        else
+            printf("%c%c", m[r1][c2], m[r2][c1]);
+    }
+
+    printf("\n");
+    return 0;
+}
