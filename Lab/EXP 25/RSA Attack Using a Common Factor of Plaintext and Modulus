@@ -1,0 +1,37 @@
+
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+int main() {
+    int n, m, g, p, q;
+
+    printf("Enter RSA modulus n: ");
+    scanf("%d", &n);
+
+    printf("Enter plaintext block m: ");
+    scanf("%d", &m);
+
+    g = gcd(m, n);
+
+    if (g > 1 && g < n) {
+        p = g;
+        q = n / p;
+
+        printf("Common factor found: %d\n", g);
+        printf("p = %d, q = %d\n", p, q);
+        printf("phi(n) = %d\n", (p-1)*(q-1));
+        printf("RSA private key can now be calculated.\n");
+    } else {
+        printf("No nontrivial factor found.\n");
+    }
+
+    return 0;
+}
