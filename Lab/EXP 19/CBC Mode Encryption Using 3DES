@@ -1,0 +1,34 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <openssl/des.h>
+
+int main() {
+    DES_cblock k1, k2, k3, iv;
+    DES_key_schedule ks1, ks2, ks3;
+    unsigned char text[128] = "HELLO CBC MODE";
+    unsigned char cipher[128];
+    int len = strlen((char *)text);
+    int i;
+
+    for(i = 0; i < 8; i++) {
+        k1[i] = i + 1;
+        k2[i] = i + 9;
+        k3[i] = i + 17;
+        iv[i] = 0;
+    }
+
+    DES_set_key_unchecked(&k1, &ks1);
+    DES_set_key_unchecked(&k2, &ks2);
+    DES_set_key_unchecked(&k3, &ks3);
+
+    DES_ede3_cbc_encrypt(text, cipher, len,
+        &ks1, &ks2, &ks3, &iv, DES_ENCRYPT);
+
+    printf("Encrypted ciphertext:\n");
+    for(i = 0; i < len; i++)
+        printf("%02X", cipher[i]);
+
+    printf("\n");
+    return 0;
+}
