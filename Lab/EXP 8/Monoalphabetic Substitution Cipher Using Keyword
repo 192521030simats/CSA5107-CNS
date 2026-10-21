@@ -1,0 +1,24 @@
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char text[100];
+    char key[] = "CIPHERABDFGJKLMNOQSTUVWXYZ";
+    int i, p;
+
+    printf("Enter plaintext: ");
+    fgets(text, sizeof(text), stdin);
+
+    printf("Ciphertext: ");
+    for (i = 0; text[i] != '\0'; i++) {
+        if (isalpha(text[i])) {
+            p = toupper(text[i]) - 'A';
+            printf("%c", key[p]);
+        } else {
+            printf("%c", text[i]);
+        }
+    }
+
+    return 0;
+}
