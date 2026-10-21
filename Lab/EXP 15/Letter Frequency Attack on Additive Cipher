@@ -1,0 +1,51 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char c[500], p[26][500];
+    int score[26], i, j, k, n, top = 10;
+    char freq[] = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+
+    printf("Enter ciphertext: ");
+    fgets(c, sizeof(c), stdin);
+    n = strlen(c);
+
+    for(k = 0; k < 26; k++) {
+        score[k] = 0;
+
+        for(i = 0; i < n; i++) {
+            if(isalpha(c[i])) {
+                char x = toupper(c[i]);
+                p[k][i] = (x - 'A' - k + 26) % 26 + 'A';
+
+                for(j = 0; j < 26; j++)
+                    if(p[k][i] == freq[j])
+                        score[k] += 26 - j;
+            } else {
+                p[k][i] = c[i];
+            }
+        }
+        p[k][n] = '\0';
+    }
+
+    printf("\nTop possible plaintexts:\n");
+
+    for(i = 0; i < top; i++) {
+        int best = -1, index = -1;
+
+        for(k = 0; k < 26; k++)
+            if(score[k] > best) {
+                best = score[k];
+                index = k;
+            }
+
+        if(index == -1) break;
+
+        printf("Key %d: %s\n", index, p[index]);
+        score[index] = -1;
+    }
+
+    return 0;
+}
