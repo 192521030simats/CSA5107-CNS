@@ -1,0 +1,18 @@
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int i;
+    double keys = 1, power;
+
+    for (i = 1; i <= 25; i++)
+        keys *= i;
+
+    power = log(keys) / log(2);
+
+    printf("Possible keys = 25!\n");
+    printf("Approximate power of 2 = 2^%.2f\n", power);
+
+    return 0;
+}
