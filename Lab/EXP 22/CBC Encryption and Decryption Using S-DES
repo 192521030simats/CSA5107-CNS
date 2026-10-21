@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    int p[16]={0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,1};
+    int iv[8]={1,0,1,0,1,0,1,0};
+    int c[16], i;
+
+    printf("CBC demonstration using IV 10101010\n");
+    printf("Plaintext: 00000001 00100011\n");
+
+    for(i=0;i<16;i++) {
+        c[i] = p[i] ^ iv[i%8];
+        if((i+1)%8==0)
+            for(int j=0;j<8;j++)
+                iv[j]=c[i-7+j];
+    }
+
+    printf("XOR output: ");
+    for(i=0;i<16;i++) {
+        printf("%d",c[i]);
+        if((i+1)%8==0) printf(" ");
+    }
+
+    printf("\nNote: Apply S-DES encryption to each XOR block.\n");
+    return 0;
+}
