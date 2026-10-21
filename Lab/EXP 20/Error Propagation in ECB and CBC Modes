@@ -1,0 +1,18 @@
+
+#include <stdio.h>
+
+int main() {
+    printf("ECB Mode:\n");
+    printf("Error in C1 affects only P1.\n");
+
+    printf("\nCBC Mode:\n");
+    printf("Error in C1 affects P1 and P2.\n");
+
+    printf("Blocks P3 onwards remain unaffected.\n");
+
+    printf("\nError in source P1:\n");
+    printf("The error propagates through all subsequent\n");
+    printf("ciphertext blocks in CBC mode.\n");
+
+    return 0;
+}
