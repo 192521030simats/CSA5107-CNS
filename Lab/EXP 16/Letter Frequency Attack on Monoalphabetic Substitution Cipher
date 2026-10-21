@@ -1,0 +1,48 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char c[1000], p[1000];
+    char freq[] = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    int count[26] = {0}, map[26];
+    int i, j, n;
+
+    printf("Enter ciphertext:\n");
+    fgets(c, sizeof(c), stdin);
+    n = strlen(c);
+
+    for(i = 0; c[i]; i++)
+        if(isalpha(c[i]))
+            count[toupper(c[i]) - 'A']++;
+
+    for(i = 0; i < 26; i++)
+        map[i] = i;
+
+    for(i = 0; i < 26; i++)
+        for(j = i + 1; j < 26; j++)
+            if(count[map[j]] > count[map[i]]) {
+                int t = map[i];
+                map[i] = map[j];
+                map[j] = t;
+            }
+
+    for(i = 0; i < n; i++) {
+        if(isalpha(c[i])) {
+            int x = toupper(c[i]) - 'A';
+            for(j = 0; j < 26; j++)
+                if(map[j] == x) break;
+            p[i] = islower(c[i]) ? tolower(freq[j]) : freq[j];
+        } else {
+            p[i] = c[i];
+        }
+    }
+    p[n] = '\0';
+
+    printf("\nPossible plaintext (frequency estimate):\n%s\n", p);
+    printf("\nNote: This basic program produces one estimate, ");
+    printf("not the top 10 ranked plaintexts.\n");
+
+    return 0;
+}
