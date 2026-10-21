@@ -1,0 +1,31 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char p[200];
+    int i, n, block = 8, pad;
+
+    printf("Enter plaintext (binary): ");
+    scanf("%199s", p);
+
+    n = strlen(p);
+
+    if (n == 0) {
+        printf("Plaintext must not be empty.\n");
+        return 0;
+    }
+
+    pad = block - (n % block);
+
+    printf("Padded plaintext: %s", p);
+    printf("1");
+
+    for (i = 1; i < pad; i++)
+        printf("0");
+
+    printf("\n");
+    printf("Applicable to ECB, CBC and CFB (segment size 8).\n");
+
+    return 0;
+}
