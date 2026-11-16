@@ -1,0 +1,28 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+int main()
+{
+    char p[100];
+    int i, k;
+
+    printf("Enter plaintext: ");
+    scanf("%99s", p);
+
+    srand(time(0));
+
+    printf("Ciphertext: ");
+
+    for(i = 0; p[i] != '\0'; i++)
+    {
+        k = rand() % 26;
+        int c = ((p[i] - 'A') + k) % 26;
+
+        printf("%c", c + 'A');
+    }
+
+    return 0;
+}
