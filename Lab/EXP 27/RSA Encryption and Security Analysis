@@ -1,0 +1,27 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char msg[100];
+    int i, n=3233, e=17, c;
+
+    printf("Enter message: ");
+    scanf("%s", msg);
+
+    printf("Encrypted message: ");
+
+    for(i=0; msg[i]!='\0'; i++)
+    {
+        int m=msg[i]-'A';
+        int r=1;
+
+        for(int j=0;j<e;j++)
+            r=(r*m)%n;
+
+        printf("%d ",r);
+    }
+
+    return 0;
+}
