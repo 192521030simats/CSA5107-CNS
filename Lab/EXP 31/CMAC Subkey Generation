@@ -1,0 +1,35 @@
+
+#include <stdio.h>
+
+int main()
+{
+    unsigned char L = 0x80, K1, K2;
+    int bits;
+    unsigned char R;
+
+    printf("Enter block size: ");
+    scanf("%d", &bits);
+
+    if(bits == 64)
+        R = 0x1B;
+    else if(bits == 128)
+        R = 0x87;
+    else
+    {
+        printf("Invalid block size");
+        return 0;
+    }
+
+    K1 = L << 1;
+    if(L & 0x80)
+        K1 ^= R;
+
+    K2 = K1 << 1;
+    if(K1 & 0x80)
+        K2 ^= R;
+
+    printf("K1 = %02X\n", K1);
+    printf("K2 = %02X\n", K2);
+
+    return 0;
+}
