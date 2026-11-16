@@ -1,0 +1,21 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int rate=1024, lanes=25;
+    int capacity=lanes-(rate/64);
+    int blocks=0, nonzero=0;
+
+    while(nonzero<capacity)
+    {
+        nonzero++;
+        blocks++;
+    }
+
+    printf("Capacity lanes: %d\n",capacity);
+    printf("Blocks required: %d\n",blocks);
+    printf("Time: %d message blocks",blocks);
+
+    return 0;
+}
