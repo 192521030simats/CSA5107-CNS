@@ -1,0 +1,21 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int K, X, T, Y, MAC;
+
+    printf("Enter key and message: ");
+    scanf("%d%d", &K, &X);
+
+    T = K ^ X;
+    Y = X ^ T;
+
+    MAC = K ^ Y;
+
+    printf("MAC of X: %d\n", T);
+    printf("Second block: %d\n", Y);
+    printf("MAC of X||Y: %d\n", MAC);
+
+    return 0;
+}
