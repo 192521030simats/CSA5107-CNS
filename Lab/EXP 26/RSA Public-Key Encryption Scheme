@@ -1,0 +1,23 @@
+
+#include <stdio.h>
+int main()
+{
+    int p=7,q=11,n,phi,e=7,d=43;
+    int m=9,c=1,i;
+
+    n=p*q;
+    phi=(p-1)*(q-1);
+
+    for(i=0;i<e;i++)
+        c=(c*m)%n;
+
+    printf("Encrypted: %d\n",c);
+
+    m=1;
+    for(i=0;i<d;i++)
+        m=(m*c)%n;
+
+    printf("Decrypted: %d",m);
+
+    return 0;
+}
