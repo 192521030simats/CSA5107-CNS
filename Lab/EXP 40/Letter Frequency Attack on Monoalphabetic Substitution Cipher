@@ -1,0 +1,49 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[500];
+    char freq[] = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    int count[26] = {0}, i, j, temp;
+    char letters[26];
+
+    printf("Enter ciphertext: ");
+    fgets(text, sizeof(text), stdin);
+
+    for(i = 0; text[i]; i++)
+        if(text[i] >= 'A' && text[i] <= 'Z')
+            count[text[i]-'A']++;
+
+    for(i = 0; i < 26; i++)
+        letters[i] = 'A' + i;
+
+    for(i = 0; i < 26; i++)
+        for(j = i+1; j < 26; j++)
+            if(count[letters[i]-'A'] <
+               count[letters[j]-'A'])
+            {
+                temp = letters[i];
+                letters[i] = letters[j];
+                letters[j] = temp;
+            }
+
+    printf("\nTop 10 Possible Plaintexts:\n");
+
+    for(i = 0; i < 10; i++)
+    {
+        printf("\n%d. ", i+1);
+
+        for(j = 0; text[j]; j++)
+        {
+            if(text[j] >= 'A' && text[j] <= 'Z')
+                printf("%c", freq[
+                strchr(letters,text[j])-letters]);
+            else
+                printf("%c",text[j]);
+        }
+    }
+
+    return 0;
+}
