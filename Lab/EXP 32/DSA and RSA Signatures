@@ -1,0 +1,24 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int message = 25;
+    int p = 23, q = 11, g = 2;
+    int x = 3, k1 = 4, k2 = 7;
+    int dsa1, dsa2, rsa1, rsa2;
+
+    dsa1 = (g * k1 + message + x) % p;
+    dsa2 = (g * k2 + message + x) % p;
+
+    rsa1 = (message * message) % p;
+    rsa2 = (message * message) % p;
+
+    printf("DSA Signature 1 = %d\n", dsa1);
+    printf("DSA Signature 2 = %d\n", dsa2);
+
+    printf("RSA Signature 1 = %d\n", rsa1);
+    printf("RSA Signature 2 = %d\n", rsa2);
+
+    return 0;
+}
